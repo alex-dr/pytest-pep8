@@ -21,6 +21,11 @@ def pytest_addoption(parser):
         help="max. line length (default: %d)" % pep8.MAX_LINE_LENGTH)
 
 
+def pytest_configure(config):
+    if config.option.pep8:
+        config.addinivalue_line('markers', 'pep8: Tests which run pep8.')
+
+
 def pytest_sessionstart(session):
     config = session.config
     if config.option.pep8:
